@@ -5,16 +5,16 @@ set -e
 #rm -fr build.env backend.tf terraform.tfvars
 
 # ./.prepare.sh (modified line 7)
-if [[ "${{ github.ref_name }}" == "main" ]]; then
-  export TF_VAR_environment="production"
-elif [[ "${{ github.ref_name }}" == "staging" ]]; then
-  export TF_VAR_environment="staging"
+if [[ "${ENV_NAME}" == "main" ]]; then
+  TF_VAR_environment="production"
+elif [[ "${ENV_NAME}" == "staging" ]]; then
+  TF_VAR_environment="staging"
 else
-  export TF_VAR_environment="develop"
+  TF_VAR_environment="develop"
 fi
 
 #export TF_VAR_environment=${{ github.ref_name }}  # Remove leading 'refs/heads/'
-#TF_VAR_environment="${TF_VAR_environment:-"develop"}"  # Set default to 'develop' if empty
+TF_VAR_environment="${TF_VAR_environment:-"develop"}"  # Set default to 'develop' if empty
 
 #TF_VAR_environment="${TF_VAR_environment:-"develop"}"
 echo "TF_VAR_environment=$TF_VAR_environment" >> build.env
