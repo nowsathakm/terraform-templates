@@ -14,6 +14,5 @@ jobs:
 
     - name: Run prepare.sh
       run: |
-        echo ${{ github.ref == 'refs/heads/main' ? 'production' : github.ref == 'refs/heads/staging' ? 'staging' : 'develop' }}
         chmod +x .prepare.sh
-        #./.prepare.sh
+        ./.prepare.sh
